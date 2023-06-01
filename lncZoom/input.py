@@ -71,5 +71,15 @@ def parse_yaml(path):
     return specdict, paths
 
 
-
+#######################################################################################################################
+# FASTA
+def read_fasta(path):
+    o = {}
+    with open(path) as fh:
+        for line in fh:
+            if line.startswith('>'):
+                species = line.strip().replace('>', '')
+                seq = next(fh)
+                o[species] = seq.strip().upper()
+    return o
 
